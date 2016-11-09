@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="miapp">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="css/ionic.css" rel="stylesheet">
+    <script src="js/ionic.bundle.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es&sensor=true"></script>
+        
+</head>
+
+<body ng-controller="control1">
+    {{"Hola"}}
+    <ion-header-bar class="bar-positive">
+        <buttons>
+            <a class="button button-icon icon ion-settings" ng-click="ubicar()"></a>
+        </buttons>
+        </ion-header-bar>
+        <ion-content>
+        
+      
+        </ion-content>
+        <ion-footer-bar class="bar-positive">
+           
+            <label >Latitud</label>
+        <input type="text"  ng-model="latitud">
+        <label >Longitud</label>
+        <input type="text" ng-model="longitud">
+        </ion-footer-bar>            
+        <script>
+            var miapp = angular.module('miapp', ['ionic'])
+                .controller('control1', function ($scope,$timeout) {
+                    $scope.ubicar = function () {
+                        window.navigator.geolocation.getCurrentPosition(function(geo){
+                            var latitud=geo.coords.latitude;
+                            
+                             var longitud=geo.coords.longitude;
+                            $timeout (function(){$scope.latitud=latitud;
+                                $scope.longitud=longitud;                },1000);
+                            
+                            
+                            
+                        });
+                        
+                    }
+                })
+        </script>
+</body>
+
+</html>
